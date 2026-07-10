@@ -1,0 +1,14 @@
+{
+  "name": "manoj-plugins",
+  "owner": {
+    "name": "Manoj Kumar",
+    "email": "manojkotary@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "agentic-code-review",
+      "source": "./code-review-plugin",
+      "description": "Multi-agent code review: parallel specialized reviewers, confidence scoring, terminal or inline GitHub PR reporting."
+    }
+  ]
+}

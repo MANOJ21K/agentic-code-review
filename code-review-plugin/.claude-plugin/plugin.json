@@ -1,0 +1,10 @@
+{
+  "name": "agentic-code-review",
+  "version": "0.1.0",
+  "description": "Multi-agent code review that fans out to specialized subagents (bugs, security, CLAUDE.md compliance, git history, test coverage), scores findings by confidence, filters noise, and reports to the terminal or as inline GitHub PR comments.",
+  "author": {
+    "name": "Manoj Kumar",
+    "email": "manojkotary@gmail.com"
+  },
+  "keywords": ["code-review", "pull-request", "agents", "security", "quality"]
+}
