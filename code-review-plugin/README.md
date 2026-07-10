@@ -8,7 +8,7 @@ It's an extended re-implementation of Anthropic's official [code-review plugin](
 
 ```
 /plugin marketplace add "/Users/manojkumar/Desktop/Learnings/Claude Assets"
-/plugin install agentic-code-review@manoj-plugins
+/plugin install agentic-code-review@reviewcrew
 ```
 
 Then the command is available as `/agentic-code-review:code-review`.

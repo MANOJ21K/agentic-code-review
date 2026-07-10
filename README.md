@@ -1,4 +1,4 @@
-# manoj-plugins
+# reviewcrew
 
 A Claude Code plugin marketplace. Currently ships one plugin:
 
@@ -14,7 +14,7 @@ Full docs: **[code-review-plugin/README.md](code-review-plugin/README.md)**
 
 ```
 /plugin marketplace add MANOJ21K/agentic-code-review
-/plugin install agentic-code-review@manoj-plugins
+/plugin install agentic-code-review@reviewcrew
 ```
 
 ### Use
