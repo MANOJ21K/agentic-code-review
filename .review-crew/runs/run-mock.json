@@ -1,6 +1,10 @@
 {
   "run_id": "2026-07-12-110530",
   "target": "local",
+  "metadata": {
+    "diff_chars": 5200,
+    "context_chars": 800
+  },
   "raw_findings": {
     "bug-hunter": [
       "src/main.js:42 | Bug | 95 | Potential null pointer exception when user object is undefined. | user.profile could throw if user is null | Add optional chaining: user?.profile",

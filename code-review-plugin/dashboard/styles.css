@@ -100,7 +100,7 @@ header {
 /* Stats */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -124,13 +124,15 @@ header {
 }
 
 .stat-value {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     line-height: 1.2;
 }
 
 .text-warning { color: var(--warning); }
 .text-success { color: var(--success); }
+.text-cyan { color: var(--accent-cyan); }
+.text-blue { color: var(--accent-blue); }
 .stat-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
 
 /* Dashboard Content */

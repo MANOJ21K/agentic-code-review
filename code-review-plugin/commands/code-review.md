@@ -67,9 +67,11 @@ What remains is the final finding set.
 ## Phase 6 — Report & Telemetry
 
 Before reporting, **save telemetry**:
+- Use the `Bash` tool to estimate the character count of the diff and the context scout output (e.g., `wc -c`). 
 - Construct a JSON object containing:
   - `run_id`: A unique timestamp (e.g. `YYYY-MM-DD-HHMMSS`).
   - `target`: The PR number or "local".
+  - `metadata`: A dictionary containing `diff_chars` and `context_chars` representing their character lengths.
   - `raw_findings`: All findings grouped by the subagent that found them.
   - `filtered_findings`: List of findings that were dropped and their drop reason.
   - `final_findings`: The final deduped set.
