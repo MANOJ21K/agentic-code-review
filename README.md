@@ -1,22 +1,84 @@
-# reviewcrew
+<div align="center">
+  
+# 🤖 ReviewCrew
 
-A Claude Code plugin marketplace. Currently ships one plugin:
+**The Agentic Code Review Marketplace for Claude Code**
 
-## agentic-code-review
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/MANOJ21K/agentic-code-review/graphs/commit-activity)
 
-Multi-agent code review, the **agentic way**: one orchestrator command fans out to six parallel specialized reviewers — bugs, security, CLAUDE.md compliance, git history, test coverage — each with its own model and narrow mandate. Findings are scored 0–100 by confidence, filtered against a shared false-positive list, deduped, and reported to your terminal or posted as inline GitHub PR comments.
+</div>
 
-Extended re-implementation of Anthropic's official [code-review plugin](https://claude.com/plugins/code-review): same phase structure and confidence-gating philosophy, plus security + test-coverage reviewers and a local-diff mode that needs no GitHub.
+---
 
-Full docs: **[code-review-plugin/README.md](code-review-plugin/README.md)**
+A Claude Code plugin marketplace focused on bringing multi-agent orchestration directly into your development workflow. Currently ships our flagship plugin:
 
-### Demo
+## ⚡ agentic-code-review
 
-> **Show, Don't Just Tell:** Watch the agents successfully review a complex PR and catch bugs standard linters miss.
+Review your pull requests or local diffs the **agentic way**. One orchestrator command fans out to a crew of specialized subagents—each running in parallel with its own model and narrow mandate. 
 
-![Agentic Code Review Demo](demo.gif) *(Add your demo GIF or video here)*
+Instead of noisy, generic AI reviews, `agentic-code-review` aggressively filters out false positives. Findings are scored 0–100 by confidence, filtered against a shared noise list, deduped, and reported to your terminal or posted as inline GitHub PR comments.
 
-### Architecture
+> Extended re-implementation of Anthropic's official [code-review plugin](https://claude.com/plugins/code-review): featuring the same phase structure and confidence-gating philosophy, plus **security** + **test-coverage** reviewers, a **local-diff mode**, and a **rich observability dashboard**.
+
+Full technical documentation: **[code-review-plugin/README.md](code-review-plugin/README.md)**
+
+---
+
+### ✨ Key Features
+
+- **🚀 Parallel Fan-out:** Six specialized agents (Bug Hunter, Security, Compliance, Git History, Test Coverage, Custom) review your code simultaneously.
+- **🛡️ Aggressive Noise Filtering:** A shared `confidence-scoring` rubric ensures you only see high-signal, actionable feedback.
+- **💻 Local Diff Mode:** Review uncommitted changes right in your terminal—no GitHub required.
+- **💬 GitHub Native:** Pass a PR number and the `--comment` flag to automatically post deduped, inline review comments directly on GitHub.
+- **📊 NEW: Observability Dashboard:** Launch a beautiful, local web UI to inspect the exact findings and confidence scores of every agent in the fan-out.
+
+---
+
+### 🚀 Quickstart
+
+Get up and running in under a minute via Claude Code.
+
+**Prerequisites:** 
+- [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) installed (`npm install -g @anthropic-ai/claude-code`)
+- Ensure your environment has the required Anthropic API keys configured.
+
+```bash
+/plugin marketplace add MANOJ21K/agentic-code-review
+/plugin install agentic-code-review@reviewcrew
+```
+
+---
+
+### 💻 Usage
+
+Run reviews directly from your Claude Code terminal:
+
+```bash
+/agentic-code-review:code-review                 # Review your uncommitted local diff
+/agentic-code-review:code-review 123             # Review GitHub PR #123 (Terminal report)
+/agentic-code-review:code-review 123 --comment   # Review GitHub PR #123 & post inline comments
+/agentic-code-review:code-review --focus security --threshold 90 # Strict security-only scan
+```
+
+---
+
+### 📊 Observability Dashboard
+
+Multi-agent systems shouldn't be a black box. You can visualize exactly how the agents performed, what they found, and why the orchestrator filtered certain items out.
+
+After running a code review, launch the dashboard:
+
+```bash
+/agentic-code-review:dashboard
+```
+
+*This spins up a local server and opens a sleek, glassmorphic UI in your browser displaying the full telemetry of the run.*
+
+---
+
+### 🏗️ Architecture
 
 ```mermaid
 flowchart TD
@@ -36,46 +98,33 @@ flowchart TD
     
     S -->|Confidence > Threshold| F[False-Positive Filter]
     F --> D[Deduplication]
-    D --> Rep[Terminal Report / PR Comment]
+    D --> Rep[Terminal / PR Comment / Telemetry JSON]
 ```
 
-### Quickstart
+---
 
-Get up and running in under a minute via Claude Code.
+### 🧠 Background & Credibility
 
-**Prerequisites:** 
-- Claude Code installed (`npm install -g @anthropic-ai/claude-code`)
-- Ensure your environment has any required API keys configured.
+This architecture is heavily informed by hands-on experience building complex platforms like **CoAgentics**. Developing real-world multi-agent systems—including insights gained as a finalist at the **Google Cloud Agentic AI Day hackathon**—shaped the orchestration, context passing, and confidence-gating logic of this tool. It is built to handle generative AI at scale, tailored for senior developers who demand reliable, low-noise code reviews.
 
-```bash
-/plugin marketplace add MANOJ21K/agentic-code-review
-/plugin install agentic-code-review@reviewcrew
-```
+---
 
-### Use
+### 🤝 Contributing
 
-```bash
-/agentic-code-review:code-review                 # review the local diff
-/agentic-code-review:code-review 123             # review GitHub PR #123
-/agentic-code-review:code-review 123 --comment   # post inline PR comments
-/agentic-code-review:code-review --focus security --threshold 90
-```
+We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started. 
 
-### Background & Credibility
+Look out for issues labeled `good first issue` or `help wanted` to jump right in. High-impact areas include adding support for new languages, optimizing agent prompts, and enhancing the new observability dashboard.
 
-This architecture is heavily informed by hands-on experience building complex platforms like **CoAgentics**. Developing real-world multi-agent systems—including insights gained as a finalist at the **Google Cloud Agentic AI Day hackathon**—shaped the orchestration, context passing, and confidence-gating logic of this tool. It is built to handle generative AI at scale, for developers who need reliable, low-noise code reviews.
+---
 
-### Contributing
+### 📁 Layout
 
-We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started. Look out for issues labeled `good first issue` or `help wanted` to jump right in.
-
-### Layout
-
-```
+```text
 .claude-plugin/marketplace.json       marketplace manifest
 code-review-plugin/
 ├─ .claude-plugin/plugin.json         plugin manifest
-├─ commands/code-review.md            orchestrator (6-phase workflow)
+├─ commands/                          orchestrator & dashboard launchers
+├─ dashboard/                         observability UI source (HTML/CSS/JS)
 ├─ agents/                            7 reviewer subagents
 ├─ skills/                            confidence-scoring, review-reporting
 └─ README.md                          full documentation

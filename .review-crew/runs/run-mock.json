@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-07-12-110530",
+  "target": "local",
+  "raw_findings": {
+    "bug-hunter": [
+      "src/main.js:42 | Bug | 95 | Potential null pointer exception when user object is undefined. | user.profile could throw if user is null | Add optional chaining: user?.profile",
+      "src/utils.js:15 | Bug | 60 | Inefficient loop condition. | Array length evaluated every iteration | Cache array length"
+    ],
+    "security-reviewer": [
+      "src/auth.js:88 | Security | 90 | Hardcoded JWT secret. | Attackers can forge tokens | Use process.env.JWT_SECRET",
+      "src/main.js:42 | Bug | 85 | Unhandled exception on null user can crash server. | Denial of Service | Handle null case gracefully"
+    ],
+    "compliance-reviewer": [
+      "src/auth.js:10 | Compliance | 75 | Missing docstring on public function. | Violates CLAUDE.md rule 4 | Add JSDoc block"
+    ]
+  },
+  "filtered_findings": [
+    {
+      "raw": "src/utils.js:15 | Bug | 60 | Inefficient loop condition. | Array length evaluated every iteration | Cache array length",
+      "reason": "confidence too low"
+    },
+    {
+      "raw": "src/auth.js:10 | Compliance | 75 | Missing docstring on public function. | Violates CLAUDE.md rule 4 | Add JSDoc block",
+      "reason": "caught by False-Positive list"
+    }
+  ],
+  "final_findings": [
+    "src/main.js:42 | Bug | 95 | Potential null pointer exception when user object is undefined. | user.profile could throw if user is null | Add optional chaining: user?.profile",
+    "src/auth.js:88 | Security | 90 | Hardcoded JWT secret. | Attackers can forge tokens | Use process.env.JWT_SECRET"
+  ]
+}

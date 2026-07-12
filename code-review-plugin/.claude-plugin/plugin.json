@@ -6,5 +6,15 @@
     "name": "Manoj Kumar",
     "email": "manojkotary@gmail.com"
   },
-  "keywords": ["code-review", "pull-request", "agents", "security", "quality"]
+  "keywords": ["code-review", "pull-request", "agents", "security", "quality"],
+  "endpoints": [
+    {
+      "name": "code-review",
+      "description": "Run the multi-agent code review."
+    },
+    {
+      "name": "dashboard",
+      "description": "Launch the observability dashboard."
+    }
+  ]
 }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Code Review Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-panel">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#00D2FF"/>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00D2FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>Agentic Review Crew</h1>
+            </div>
+            <div class="run-info" id="run-info">
+                Loading telemetry...
+            </div>
+            <div class="upload-container">
+                <input type="file" id="file-upload" accept=".json" class="file-input" />
+                <label for="file-upload" class="btn-primary">Load JSON Run</label>
+            </div>
+        </header>
+
+        <main>
+            <section class="stats-grid">
+                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.1s">
+                    <h3>Raw Findings</h3>
+                    <div class="stat-value" id="stat-raw">0</div>
+                    <div class="stat-desc">From all subagents</div>
+                </div>
+                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.2s">
+                    <h3>Filtered Out</h3>
+                    <div class="stat-value text-warning" id="stat-filtered">0</div>
+                    <div class="stat-desc">Noise & False Positives</div>
+                </div>
+                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.3s">
+                    <h3>Final Deliverable</h3>
+                    <div class="stat-value text-success" id="stat-final">0</div>
+                    <div class="stat-desc">High-confidence issues</div>
+                </div>
+            </section>
+
+            <div class="dashboard-content">
+                <div class="left-col">
+                    <section class="panel glass-panel">
+                        <h2>Final Findings</h2>
+                        <div class="list-container" id="final-list">
+                            <div class="empty-state">No final findings to display.</div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="right-col">
+                    <section class="panel glass-panel">
+                        <h2>Agent Fan-out (Raw)</h2>
+                        <div class="tabs" id="agent-tabs">
+                            <!-- Tabs populated dynamically -->
+                        </div>
+                        <div class="list-container" id="raw-list">
+                            <div class="empty-state">Load a run to see agent telemetry.</div>
+                        </div>
+                    </section>
+
+                    <section class="panel glass-panel mt-4">
+                        <h2>Filtered Log</h2>
+                        <div class="list-container" id="filtered-list">
+                             <div class="empty-state">No filtered findings.</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Template for a finding item -->
+    <template id="finding-template">
+        <div class="finding-card">
+            <div class="finding-header">
+                <span class="badge category-badge">Category</span>
+                <span class="badge conf-badge">Score</span>
+            </div>
+            <div class="finding-loc">file:line</div>
+            <div class="finding-summary">Summary goes here</div>
+            <div class="finding-reason hidden">Reason: <span class="reason-text"></span></div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -57,16 +57,25 @@ Default lineup (6 agents):
 
 Merge every reviewer's findings, then:
 1. **Parse** each pipe-delimited block: `file:line | category | confidence | summary | scenario | fix`.
-2. **Threshold** — drop any finding with confidence below the effective threshold.
-3. **Rejection list** — re-check each survivor against `confidence-scoring`'s automatic-rejection list (style, linter-catchable, pre-existing, vague quality, unreachable speculation). Drop matches even if the agent scored them high.
-4. **Verify anchoring** — confirm each cited `file:line` is actually a changed line in the diff. Drop findings that point outside the diff.
-5. **Dedupe** — collapse findings that describe the same defect at the same location (across agents) into one; keep the highest-confidence phrasing.
+2. **Threshold** — drop any finding with confidence below the effective threshold. Record the reason as "confidence too low".
+3. **Rejection list** — re-check each survivor against `confidence-scoring`'s automatic-rejection list (style, linter-catchable, pre-existing, vague quality, unreachable speculation). Drop matches even if the agent scored them high. Record the reason as "caught by False-Positive list".
+4. **Verify anchoring** — confirm each cited `file:line` is actually a changed line in the diff. Drop findings that point outside the diff. Record the reason as "not in diff".
+5. **Dedupe** — collapse findings that describe the same defect at the same location (across agents) into one; keep the highest-confidence phrasing. Record as "deduplicated".
 
 What remains is the final finding set.
 
-## Phase 6 — Report
+## Phase 6 — Report & Telemetry
 
-Follow **review-reporting**.
+Before reporting, **save telemetry**:
+- Construct a JSON object containing:
+  - `run_id`: A unique timestamp (e.g. `YYYY-MM-DD-HHMMSS`).
+  - `target`: The PR number or "local".
+  - `raw_findings`: All findings grouped by the subagent that found them.
+  - `filtered_findings`: List of findings that were dropped and their drop reason.
+  - `final_findings`: The final deduped set.
+- Save this JSON to `.review-crew/runs/run-<timestamp>.json` (create the directory if it doesn't exist).
+
+Then, follow **review-reporting**:
 - **No `--comment`** (local, or PR without the flag): print the terminal report. If nothing survived, print exactly `No issues found.`
 - **`--comment`** (PR mode): dedupe against existing PR comments, post one inline comment per unique finding anchored to the full head SHA (suggestion blocks only when they fully resolve the issue), then post the summary comment. If nothing survived, post the single "no issues" comment and no inline comments.
 
