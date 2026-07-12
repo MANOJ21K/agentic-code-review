@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="app-container">
-        <header class="glass-panel">
+        <header>
             <div class="logo">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#00D2FF"/>
@@ -28,27 +28,27 @@
 
         <main>
             <section class="stats-grid">
-                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.1s">
+                <div class="stat-card fade-in" style="animation-delay: 0.1s">
                     <h3>Raw Findings</h3>
                     <div class="stat-value" id="stat-raw">0</div>
                     <div class="stat-desc">From all subagents</div>
                 </div>
-                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.2s">
+                <div class="stat-card fade-in" style="animation-delay: 0.2s">
                     <h3>Filtered Out</h3>
                     <div class="stat-value text-warning" id="stat-filtered">0</div>
                     <div class="stat-desc">Noise & False Positives</div>
                 </div>
-                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.3s">
+                <div class="stat-card fade-in" style="animation-delay: 0.3s">
                     <h3>Final Deliverable</h3>
                     <div class="stat-value text-success" id="stat-final">0</div>
                     <div class="stat-desc">High-confidence issues</div>
                 </div>
-                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.4s">
+                <div class="stat-card fade-in" style="animation-delay: 0.4s">
                     <h3>Est. Tokens</h3>
                     <div class="stat-value text-cyan" id="stat-tokens">0</div>
                     <div class="stat-desc">Total Input + Output</div>
                 </div>
-                <div class="stat-card glass-panel fade-in" style="animation-delay: 0.5s">
+                <div class="stat-card fade-in" style="animation-delay: 0.5s">
                     <h3>Est. Cost</h3>
                     <div class="stat-value text-blue" id="stat-cost">$0.00</div>
                     <div class="stat-desc">Multi-model total</div>
@@ -57,8 +57,10 @@
 
             <div class="dashboard-content">
                 <div class="left-col">
-                    <section class="panel glass-panel">
-                        <h2>Final Findings</h2>
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2>Final Findings</h2>
+                        </div>
                         <div class="list-container" id="final-list">
                             <div class="empty-state">No final findings to display.</div>
                         </div>
@@ -66,18 +68,22 @@
                 </div>
                 
                 <div class="right-col">
-                    <section class="panel glass-panel">
-                        <h2>Agent Fan-out (Raw)</h2>
-                        <div class="tabs" id="agent-tabs">
-                            <!-- Tabs populated dynamically -->
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2>Agent Fan-out (Raw)</h2>
+                            <div class="tabs" id="agent-tabs">
+                                <!-- Tabs populated dynamically -->
+                            </div>
                         </div>
                         <div class="list-container" id="raw-list">
                             <div class="empty-state">Load a run to see agent telemetry.</div>
                         </div>
                     </section>
 
-                    <section class="panel glass-panel mt-4">
-                        <h2>Filtered Log</h2>
+                    <section class="panel mt-4" style="height: auto; min-height: 250px;">
+                        <div class="panel-header">
+                            <h2>Filtered Log</h2>
+                        </div>
                         <div class="list-container" id="filtered-list">
                              <div class="empty-state">No filtered findings.</div>
                         </div>

@@ -127,13 +127,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateFloat(obj, start, end, duration, prefix = '') {
         let startTimestamp = null;
+        // easeOutExpo easing function
+        const easeOutExpo = (x) => {
+            return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+        };
+        
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const current = (progress * (end - start) + start).toFixed(4);
+            const easedProgress = easeOutExpo(progress);
+            
+            const current = (easedProgress * (end - start) + start).toFixed(4);
             obj.innerHTML = prefix + current;
             if (progress < 1) {
                 window.requestAnimationFrame(step);
+            } else {
+                obj.innerHTML = prefix + end.toFixed(4); // Ensure exact final value
             }
         };
         window.requestAnimationFrame(step);
@@ -236,12 +245,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Number animation
     function animateValue(obj, start, end, duration) {
         let startTimestamp = null;
+        const easeOutExpo = (x) => {
+            return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+        };
+
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            obj.innerHTML = Math.floor(progress * (end - start) + start);
+            const easedProgress = easeOutExpo(progress);
+            
+            obj.innerHTML = Math.floor(easedProgress * (end - start) + start);
             if (progress < 1) {
                 window.requestAnimationFrame(step);
+            } else {
+                obj.innerHTML = end; // Ensure exact final value
             }
         };
         window.requestAnimationFrame(step);
