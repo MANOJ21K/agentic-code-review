@@ -20,9 +20,12 @@
             <div class="run-info" id="run-info">
                 Loading telemetry...
             </div>
-            <div class="upload-container">
-                <input type="file" id="file-upload" accept=".json" class="file-input" />
-                <label for="file-upload" class="btn-primary">Load JSON Run</label>
+            <div class="header-actions" style="display: flex; gap: 12px;">
+                <button id="export-csv" class="btn-primary" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color);">Export CSV</button>
+                <div class="upload-container">
+                    <input type="file" id="file-upload" accept=".json" class="file-input" />
+                    <label for="file-upload" class="btn-primary">Load JSON Run</label>
+                </div>
             </div>
         </header>
 

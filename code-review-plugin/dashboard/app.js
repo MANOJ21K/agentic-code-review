@@ -50,6 +50,45 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsText(file);
     });
 
+    // Handle CSV Export
+    const exportBtn = document.getElementById('export-csv');
+    exportBtn.addEventListener('click', () => {
+        if (!currentData || !currentData.raw_findings) {
+            alert('Please load a run first.');
+            return;
+        }
+
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "Agent,Category,Confidence,Summary,Location\n";
+
+        Object.entries(currentData.raw_findings).forEach(([agent, findings]) => {
+            findings.forEach(finding => {
+                let parts;
+                if (typeof finding === 'string') {
+                    parts = finding.split('|').map(s => s.trim());
+                } else {
+                    parts = [finding.location || '', finding.category || '', finding.confidence || '', finding.summary || ''];
+                }
+                
+                if (parts.length >= 4) {
+                    const loc = parts[0].replace(/"/g, '""');
+                    const cat = parts[1].replace(/"/g, '""');
+                    const conf = parts[2].replace(/"/g, '""');
+                    const sum = parts[3].replace(/"/g, '""');
+                    csvContent += `"${agent}","${cat}","${conf}","${sum}","${loc}"\n`;
+                }
+            });
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `telemetry-export-${currentData.run_id || 'latest'}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
     // Handle auto-load from a URL param (for the launcher command)
     const urlParams = new URLSearchParams(window.location.search);
     const dataUrl = urlParams.get('data');
