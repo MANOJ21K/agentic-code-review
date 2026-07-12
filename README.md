@@ -58,7 +58,7 @@ Watch the agents successfully review a complex PR, catch bugs standard linters m
 
 <div align="center">
   <img src="demo.gif" alt="Agentic Code Review Demo" width="800" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <p><em>(Add your demo GIF or video here)</em></p>
+  <p><em>(To be added)</em></p>
 </div>
 
 ---
